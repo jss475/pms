@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_07_150909) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_07_190844) do
   create_table "properties", force: :cascade do |t|
     t.string "propertyName"
     t.string "address"
@@ -23,6 +23,26 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_07_150909) do
     t.date "leasedEndDate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "tenants", force: :cascade do |t|
+    t.integer "property_id"
+    t.integer "lease_id"
+    t.integer "apartment_id"
+    t.string "firstName"
+    t.string "lastName"
+    t.string "username"
+    t.string "email"
+    t.string "password_digest"
+    t.string "password_confirmation"
+    t.integer "tenantAge"
+    t.string "tenantJobTitle"
+    t.float "tenantJobSalary"
+    t.date "leaseStartDate"
+    t.date "leaseEndDate"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "emergencyConact"
   end
 
   create_table "users", force: :cascade do |t|
