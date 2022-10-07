@@ -10,7 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_07_190844) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_07_191614) do
+  create_table "apartments", force: :cascade do |t|
+    t.string "apartmentNumber"
+    t.string "address"
+    t.integer "bedroomCount"
+    t.integer "bathroomCount"
+    t.float "rentalAmount"
+    t.integer "propertySize"
+    t.date "leaseStartDate"
+    t.date "leaseEndDate"
+    t.float "totalBalance"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "owner_properties", force: :cascade do |t|
+    t.integer "owner_id"
+    t.integer "property_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "properties", force: :cascade do |t|
     t.string "propertyName"
     t.string "address"
@@ -21,6 +42,20 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_07_190844) do
     t.integer "propertySize"
     t.date "leaseStartDate"
     t.date "leasedEndDate"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "property_apartments", force: :cascade do |t|
+    t.integer "property_id"
+    t.integer "apartment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tenant_apartments", force: :cascade do |t|
+    t.integer "tenant_id"
+    t.integer "apartment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -1,0 +1,2 @@
+class PropertyApartment < ApplicationRecord
+end
