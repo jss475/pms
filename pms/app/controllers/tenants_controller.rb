@@ -1,17 +1,20 @@
 class TenantsController < ApplicationController
     wrap_parameters format: []
 
-    def index
-        render json: Tenant.all, status: :ok
-    end
-
     def show
-        render json: tenant_find, status: :ok
+        tenant = Tenant.find(session[:tenant_id])
+        # tenant = User.find(params[:id])
+        render json: tenant, status: :ok
     end
 
     def create
-        tenant = Tenant.create!(tenant_params)
+        tenant = Tenant.create!(user_params)
+        session[:user_id] = tenant.id
         render json: tenant, status: :created
+    end
+
+    def index
+        render json: Tenant.all, status: :ok
     end
 
     def update

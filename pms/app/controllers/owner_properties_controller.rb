@@ -2,7 +2,7 @@ class OwnerPropertiesController < ApplicationController
     wrap_parameters format: []
 
     def index
-        render json: OwnerProperty.all, status :ok
+        render json: OwnerProperty.all, status: :ok
     end
 
     def show
@@ -30,6 +30,6 @@ class OwnerPropertiesController < ApplicationController
     private
     
     def op_params
-        params.permit(:id, :property_id, :ownder_id)
+        params.permit(:id, :property_id, :owner_id)
     end
 end
