@@ -1,0 +1,47 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "firstName": "Joe",
+      "lastName": "Shin",
+      "username": "JShin",
+      "email": "jshin@gmail.com",
+      "password": "TEST1"
+    },
+    {
+      "id": 2,
+      "firstName": "Eric",
+      "lastName": "Xiao",
+      "username": "EXiao",
+      "email": "exiao@gmail.com",
+      "password": "TEST2"
+    }
+  ],
+
+  "properties": [
+    {
+      "id": 1,
+      "propertyName": "291 Third Street",
+      "address": "291 Third Street Hackensack, NJ 07601",
+      "bedroomCount": "2",
+      "bathroomCount": "1",
+      "rentalAmount": "$1,000.00",
+      "propertySize": "1000sq ft",
+      "leaseStartDate": "01/01/2022",
+      "leaseEndDate": "12/31/2022",
+      "totalBalance": "$1,000.00"
+    },
+    {
+      "id": 2,
+      "propertyName": "290 Third Street",
+      "address": "290 Third Street Hackensack, NJ 07601",
+      "bedroomCount": "3",
+      "bathroomCount": "2",
+      "rentalAmount": "$2,000.00",
+      "propertySize": "1500sq ft",
+      "leaseStartDate": "01/01/2022",
+      "leaseEndDate": "12/31/2022",
+      "totalBalance": "$2,000.00"
+    }
+  ]
+}

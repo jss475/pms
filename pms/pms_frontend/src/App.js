@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import Auth from './components/LogIn/Auth';
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React Hi
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Auth />} />
+      </Routes>
+    </BrowserRouter>
   );
-}
+  }
 
 export default App;
+
+  // const [properties, setProperties] = useState([]);
+
+  // useEffect(() => {
+  //   fetch(`/properties`)
+  //   .then(response => response.json())
+  //   .then((properties) => {
+  //     setProperties(properties)
+  //   })
+  //   .catch(error => console.log(error))
+  // },[])
+
+  // console.log(properties)
