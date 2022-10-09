@@ -8,7 +8,7 @@ class TenantsController < ApplicationController
     end
 
     def create
-        tenant = Tenant.create!(user_params)
+        tenant = Tenant.create!(tenant_params)
         session[:user_id] = tenant.id
         render json: tenant, status: :created
     end
@@ -31,7 +31,7 @@ class TenantsController < ApplicationController
 
     def tenant_params
         params.permit(:id, :property_id, :lease_id, :apartment_id, :firstName, :lastName,
-            :username, :email, :password_digest, :password_confirmation, :tenantAge, :tenantJobTitle,
+            :username, :email, :password, :password_digest, :password_confirmation, :tenantAge, :tenantJobTitle,
             :tenantJobSalary, :leaseStartDate, :leaseEndDate, :emergencyContact)
     end
 

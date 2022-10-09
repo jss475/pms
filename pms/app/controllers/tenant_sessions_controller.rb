@@ -1,7 +1,7 @@
 class TenantSessionsController < ApplicationController
     def login
         tenant = Tenant.find_by(email: params[:email])
-        if tenant&.authenticate(params[:password_digest])
+        if tenant&.authenticate(params[:password])
             session[:tenant_id] = tenant.id
             render json: tenant, status: :created
         else
