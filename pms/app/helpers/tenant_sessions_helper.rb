@@ -1,0 +1,2 @@
+module TenantSessionsHelper
+end
