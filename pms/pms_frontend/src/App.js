@@ -1,14 +1,14 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Auth from './components/LogIn/Auth';
+import LogIn from './components/LogIn/LogIn';
 
 function App() {
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Auth />} />
+        <Route path='/' element={<LogIn />} />
       </Routes>
     </BrowserRouter>
   );
