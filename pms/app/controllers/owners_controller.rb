@@ -8,7 +8,7 @@ class OwnersController < ApplicationController
 
     def create
         owner = Owner.create!(owner_params)
-        session[:user_id] = owner.id
+        session[:owner_id] = owner.id
         render json: owner, status: :created
     end
 

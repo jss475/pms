@@ -125,7 +125,6 @@ t2 = Tenant.create(
 
 # OWNER PROPERTY DATA
 puts '✅ Seeding property data...'
-puts o1.id
 OwnerProperty.create(
   owner_id: o1.id,
   property_id: p1.id
@@ -151,6 +150,7 @@ PropertyApartment.create(
 
 # TENANT APARTMENT DATA
 puts '✅ Seeding tenant apartment data...'
+puts t1.id
 
 TenantApartment.create(
   tenant_id: t1.id, 
@@ -162,6 +162,15 @@ TenantApartment.create(
   apartment_id: a2.id
 )
 
-
+#TENANT PROPERTY DATA
+puts '✅ Seeding tenant property data...'
+TenantProperty.create(
+    tenant_id: t1.id,
+    property_id: p1.id
+)
+TenantProperty.create(
+    tenant_id: t2.id,
+    property_id: p2.id
+)
 # confirm seed data completed
 puts '🌱 Seeding Data Completed!'
