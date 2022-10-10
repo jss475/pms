@@ -9,7 +9,7 @@ class CreateProperties < ActiveRecord::Migration[7.0]
       t.float :totalBalance
       t.integer :propertySize
       t.date :leaseStartDate
-      t.date :leasedEndDate
+      t.date :leaseEndDate
       t.timestamps
     end
   end

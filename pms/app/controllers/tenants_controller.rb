@@ -3,7 +3,6 @@ class TenantsController < ApplicationController
 
     def show
         tenant = Tenant.find(session[:tenant_id])
-        # tenant = User.find(params[:id])
         render json: tenant, status: :ok
     end
 
@@ -17,6 +16,7 @@ class TenantsController < ApplicationController
         render json: Tenant.all, status: :ok
     end
 
+    #plan is to use update for filling out the rest of the form
     def update
         Tenant_find.update!(tenant_params)
         render json: tenant_find, status: :ok
