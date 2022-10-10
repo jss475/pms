@@ -12,6 +12,10 @@ class OwnersController < ApplicationController
         render json: owner, status: :created
     end
 
+    def index
+        render json: Owner.all, status: :ok
+    end
+
     private
 
     def owner_params

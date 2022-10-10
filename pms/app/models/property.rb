@@ -1,5 +1,7 @@
 class Property < ApplicationRecord
+    has_many :property_apartments
     has_many :apartments, through: :property_apartments
+    has_many :owner_properties
     has_many :owners, through: :owner_properties
 
     validates :address, presence: true
