@@ -1,5 +1,6 @@
 class Owner < ApplicationRecord
     has_secure_password
+    has_many :owner_properties
     has_many :properties, through: :owner_properties
     
     validates :username, presence: true, uniqueness: true

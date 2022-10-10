@@ -26,8 +26,8 @@ o1 = Owner.create(
   lastName: 'Shin',
   username: 'JShin',
   email: 'jShin@gmail.com',
-  password: 'password',
-  password_confirmation: 'password'
+  password: 'Password1!',
+  password_confirmation: 'Password1!'
 )
 
 # PROPERTY DATA
@@ -95,8 +95,8 @@ t1 = Tenant.create(
   lastName: 'Xiao',
   username: 'EXiao',
   email: 'eXiao@gmail.com',
-  password: 'password',
-  password_confirmation: 'password',
+  password: 'Password1!',
+  password_confirmation: 'Password1!',
   tenantAge: 28,
   tenantJobTitle: 'Software Engineer',
   tenantJobSalary: 10.00,
@@ -112,8 +112,8 @@ t2 = Tenant.create(
   lastName: 'Cho',
   username: 'HCho',
   email: 'hCho@gmail.com',
-  password: 'password',
-  password_confirmation: 'password',
+  password: 'Password1!',
+  password_confirmation: 'Password1!',
   tenantAge: 30,
   tenantJobTitle: 'Software Engineer',
   tenantJobSalary: 10.00,
@@ -125,7 +125,7 @@ t2 = Tenant.create(
 
 # OWNER PROPERTY DATA
 puts '✅ Seeding property data...'
-
+puts o1.id
 OwnerProperty.create(
   owner_id: o1.id,
   property_id: p1.id
