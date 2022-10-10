@@ -3,7 +3,6 @@ class TenantsController < ApplicationController
 
     def show
         tenant = Tenant.find(session[:tenant_id])
-        # tenant = User.find(params[:id])
         render json: tenant, status: :ok
     end
 
