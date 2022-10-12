@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  apartmentNumber: MyString
+  address: MyString
+  bedroomCount: 1
+  bathroomCount: 1
+  rentalAmount: 1.5
+  propertySize: 1
+  leaseStartDate: 2022-10-07
+  leaseEndDate: 2022-10-07
+  totalBalance: 1.5
+
+two:
+  apartmentNumber: MyString
+  address: MyString
+  bedroomCount: 1
+  bathroomCount: 1
+  rentalAmount: 1.5
+  propertySize: 1
+  leaseStartDate: 2022-10-07
+  leaseEndDate: 2022-10-07
+  totalBalance: 1.5
