@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_07_191614) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_10_181029) do
   create_table "apartments", force: :cascade do |t|
     t.string "apartmentNumber"
     t.string "address"
@@ -52,7 +52,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_07_191614) do
     t.float "totalBalance"
     t.integer "propertySize"
     t.date "leaseStartDate"
-    t.date "leasedEndDate"
+    t.date "leaseEndDate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -67,6 +67,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_07_191614) do
   create_table "tenant_apartments", force: :cascade do |t|
     t.integer "tenant_id"
     t.integer "apartment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tenant_properties", force: :cascade do |t|
+    t.integer "tenant_id"
+    t.integer "property_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

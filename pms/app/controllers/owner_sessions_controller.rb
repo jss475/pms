@@ -1,11 +1,11 @@
 class OwnerSessionsController < ApplicationController
     def login
-        owner = Owner.find_by(email: params[:email])
+        owner = Owner.find_by(username: params[:username])
         if owner&.authenticate(params[:password])
             session[:owner_id] = owner.id
             render json: owner, status: :created
         else
-            render json: { error: 'wrong email or password' }, status: :unauthorized   
+            render json: { error: 'wrong username or password' }, status: :unauthorized   
         end
     end
 
