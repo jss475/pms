@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {useSelector, useDispatch} from "react-redux"
 import {ownerSignin} from "../../features/login_signup/ownerSlice"
+import {OwnerContext} from "./OwnerContext"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
 
@@ -8,7 +9,8 @@ function LogInForm() {
   //set up dispatch to call the reducer function that's needed to change state
   const dispatch = useDispatch() 
 
-  
+  const {isLoggedIn} = useContext(OwnerContext)
+  console.log(isLoggedIn)
   // //set up a useState to take in formData w/onChange event
   const [formData, setFormData] = useState({
     username: '',

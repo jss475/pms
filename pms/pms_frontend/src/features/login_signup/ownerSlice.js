@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {OwnerContext} from "../../components/LogIn/OwnerContext"
 
 export const ownerSignup = createAsyncThunk(
     "owners/signup",
@@ -24,8 +25,10 @@ export const ownerSignup = createAsyncThunk(
             //if the owner has been created return the data
             //if not throw an error
             if(response.status === 201){
+                localStorage.setItem("username", data.username)
                 return {...data}
             }else{
+                localStorage.removeItem("username")
                 return thunkAPI.rejectWithValue(data)
             }
         } catch (e) {
@@ -51,16 +54,14 @@ export const ownerSignin = createAsyncThunk(
             })
             let data = await response.json()
             if(response.status === 201){
-                console.log(data)
+                localStorage.setItem("username",data.username)
                 return {...data}
             }else{
-                console.log(data)
-                return{...data}
-                // return thunkAPI.rejectWithValue(data)
+                return thunkAPI.rejectWithValue(data)
             }
         } catch (e) {
             console.log("Error", e.response.data)
-            // return thunkAPI.rejectWithValue(e.response.data)
+            return thunkAPI.rejectWithValue(e.response.data)
         }
     }
 )

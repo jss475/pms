@@ -5,6 +5,7 @@ import {OwnerContext} from "./components/LogIn/OwnerContext"
 import LogIn from './components/LogIn/LogIn';
 import LogInForm from './components/LogIn/LogInForm';
 import SignUpForm from './components/LogIn/SignUpForm';
+import NavbarComp from "./components/NavbarComp/NavbarComp"
 
 function App() {
 
@@ -16,13 +17,17 @@ function App() {
   // const setIsLoggedIn = useContext(OwnerContext)
 
   return (
-    <BrowserRouter>
-      <Routes>
-          <Route exact path='/' element={<LogInForm />} />
-          <Route exact path='/login' element={<LogInForm />} />
-          <Route exact path='/signup' element={<SignUpForm />} />
-      </Routes>
-    </BrowserRouter>
+    <>
+      <NavbarComp />
+      <BrowserRouter>
+        <Routes>
+            <Route exact path='/' element={<LogInForm />} />
+            <Route exact path='/login' element={<LogInForm />} />
+            <Route exact path='/signup' element={<SignUpForm />} />
+        </Routes>
+      </BrowserRouter>
+    </>
+
   );
   }
 
