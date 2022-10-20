@@ -14,10 +14,10 @@ class Owner < ApplicationRecord
     validates :password_confirmation, presence: true
     
     # validate :password_length
-    validate :password_lower_case
-    validate :password_uppercase
-    validate :password_special_char
-    validate :password_contains_number
+    # validate :password_lower_case
+    # validate :password_uppercase
+    # validate :password_special_char
+    # validate :password_contains_number
     
     private 
 

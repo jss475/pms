@@ -5,8 +5,8 @@ import SignUpForm from "./SignUpForm";
 function LogIn() {
   return (
     <>
-    <LogInForm />
-    <SignUpForm />
+      <LogInForm />
+      <SignUpForm />
     </>
   );
 }
