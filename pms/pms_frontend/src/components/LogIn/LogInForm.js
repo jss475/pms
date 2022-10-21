@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {useSelector, useDispatch} from "react-redux"
+import {useDispatch} from "react-redux"
 import {ownerSignin} from "../../features/login_signup/ownerSlice"
 import {OwnerContext} from "./OwnerContext"
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -26,7 +26,6 @@ function LogInForm() {
     e.preventDefault()
     dispatch(ownerSignin(formData))
     .then(res => {
-      console.log(res)
       if(res.type === "owners/signin/fulfilled"){
         setIsLoggedIn(true)
         navigate("/")
