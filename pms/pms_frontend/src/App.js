@@ -6,22 +6,16 @@ import LogIn from './components/LogIn/LogIn';
 import LogInForm from './components/LogIn/LogInForm';
 import SignUpForm from './components/LogIn/SignUpForm';
 import NavbarComp from "./components/NavbarComp/NavbarComp"
+import Home from "./components/Home/Home"
 
 function App() {
-
-  //call useContext with our OwnerContext
-  // const {isLoggedIn, setIsLoggedIn} = useContext(OwnerContext)
-  console.log(useContext(OwnerContext))
-
-  // const setIsLoggedIn = useContext(OwnerContext) //
-  // const setIsLoggedIn = useContext(OwnerContext)
 
   return (
     <>
       <NavbarComp />
       <BrowserRouter>
         <Routes>
-            <Route exact path='/' element={<LogInForm />} />
+            <Route exact path='/' element={<Home />} />
             <Route exact path='/login' element={<LogInForm />} />
             <Route exact path='/signup' element={<SignUpForm />} />
         </Routes>
@@ -33,15 +27,3 @@ function App() {
 
 export default App;
 
-  // const [properties, setProperties] = useState([]);
-
-  // useEffect(() => {
-  //   fetch(`/properties`)
-  //   .then(response => response.json())
-  //   .then((properties) => {
-  //     setProperties(properties)
-  //   })
-  //   .catch(error => console.log(error))
-  // },[])
-
-  // console.log(properties)

@@ -1,17 +1,28 @@
-import React, { useState, useEffect } from "react"
-import {useSelector, useDispatch} from "react-redux"
-import {ownerSignup, ownerLoggedIn} from "../../features/login_signup/ownerSlice"
+import React, { useState, useEffect, useContext } from "react"
+import {useDispatch} from "react-redux"
+import {ownerSignup} from "../../features/login_signup/ownerSlice"
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Col, Button, Row, Container, Card, Form } from "react-bootstrap";
+import {OwnerContext} from "./OwnerContext"
+import "./SignUpForm.css"
 
-function SignUpForm({isLoggedIn}) {
+function SignUpForm() {
 
   //set up dispatch to call the reducer function that's needed to change state
   const dispatch = useDispatch() 
-
-  // console.log(isLoggedIn)
-  //useSelector
-  const state = useSelector((state) => state.owner)
+  //access the OwnerContext to see if a User is logged in/signed up already
+  const {isLoggedIn, setIsLoggedIn} = useContext(OwnerContext)
+  //create an allErrors state to store all errors to be mapped to JSX
+  const [allErrors, setAllErrors] = useState([])
+  //create an errors hash map to store the backend variable names with display names
+  const errorKey = {
+    password: "Password ",
+    username: "Username ",
+    firstName: "First name ",
+    lastName: "Last name ",
+    email: "Email ",
+    password_confirmation: "Password confirmation "
+  }
   //set up a useState to take in formData w/onChange event
   const [formData, setFormData] = useState({
     firstName: '',
@@ -23,34 +34,41 @@ function SignUpForm({isLoggedIn}) {
     loggedIn: false
   })
 
-  const handleOwnerSignupSubmit = (e) => {
-    e.preventDefault()
-    dispatch(ownerSignup(formData))
-  }
-
-  //set up the fact that the user is loggedIn
-  useEffect(() => {
-    if(state["errorMessage"] || !state.username){
-      dispatch(ownerLoggedIn(false))
-
-    }else{
-      dispatch(ownerLoggedIn(true))
-    }
-    if(state.loggedIn){
-      // console.log(state.loggedIn)
-    }
-  },[state])
-
-  // console.log(state)
-
+  //onChange event when the form is being updated
   function handleInputChange(e){
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     })
   }
-
-  
+  //onSubmit event
+  const handleOwnerSignupSubmit = (e) => {
+    e.preventDefault()
+    dispatch(ownerSignup(formData))
+      .then(res => {
+        if(res.type === "owners/signup/fulfilled"){
+          setIsLoggedIn(true)
+        }else if(res.type === "owners/signup/rejected"){
+           //if no one is already logged in or there is an error message with the submit
+          //set the user log in boolean value to false
+          setIsLoggedIn(false)
+          //show error message if the submit was unsuccessful
+          let errorsContainer = []
+          let errorsObj = res["payload"]["errors"]
+          for(const error in errorsObj){
+            let indivArr = errorsObj[error]
+            for(let i =0; i < indivArr.length; i++){
+                if(indivArr[i] === "Email has already been used"){
+                  errorsContainer.push(indivArr[i])
+                }else{
+                  errorsContainer.push(errorKey[error] + indivArr[i])
+                }
+            }
+          }
+          setAllErrors(errorsContainer)
+        }
+      })
+  }
 
   return (
     <Container>
@@ -59,9 +77,15 @@ function SignUpForm({isLoggedIn}) {
           <Card className="shadow">
             <Card.Body>
               <div className="mb-3 mt-md-4">
-                <h2 className="fw-bold mb-5 text-uppercase ">Keystone Management</h2>
-                <div className="mb-3">
+                <h2 className="fw-bold mb-3 text-uppercase ">Keystone Management</h2>
 
+                {allErrors.map(error => {
+                  if(typeof error !== "number"){
+                    return <p className="error-msg" key={error}>{error}</p>
+                  }
+                })}
+                
+                <div className="mb-3">
                   <Form onSubmit = {handleOwnerSignupSubmit}>
                     <Form.Group className="mb-4" controlId="signUpFirstName">
                         <Form.Label column="sm">First Name</Form.Label>
@@ -99,9 +123,14 @@ function SignUpForm({isLoggedIn}) {
                       </p>
                     </Form.Group>
                     <div className="d-grid">
-                      <Button variant="primary" type="submit">
+                      {(isLoggedIn) ? 
+                        <Button variant="primary" type="submit" disabled>
+                          Signup
+                        </Button> :
+                        <Button variant="primary" type="submit">
                         Signup
-                      </Button>
+                        </Button>
+                      }
                     </div>
                   </Form>
                   

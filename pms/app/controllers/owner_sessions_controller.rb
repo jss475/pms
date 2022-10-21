@@ -5,7 +5,7 @@ class OwnerSessionsController < ApplicationController
             session[:owner_id] = owner.id
             render json: owner, status: :created
         else
-            render json: { error: 'wrong username or password' }, status: :unauthorized   
+            render json: { errorMessage: 'Wrong username or password' }, status: :unauthorized   
         end
     end
 

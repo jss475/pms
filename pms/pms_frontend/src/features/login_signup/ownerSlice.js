@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import {OwnerContext} from "../../components/LogIn/OwnerContext"
+import { useNavigate } from "react-router-dom";
 
+
+//Owner Sign Up POST request
 export const ownerSignup = createAsyncThunk(
     "owners/signup",
     async ({firstName, lastName, username, email, password, password_confirmation}, thunkAPI) => {
@@ -26,9 +28,11 @@ export const ownerSignup = createAsyncThunk(
             //if not throw an error
             if(response.status === 201){
                 localStorage.setItem("username", data.username)
+                localStorage.setItem("id",data.id)
                 return {...data}
             }else{
                 localStorage.removeItem("username")
+                localStorage.removeItem("id",data.id)
                 return thunkAPI.rejectWithValue(data)
             }
         } catch (e) {
@@ -37,6 +41,7 @@ export const ownerSignup = createAsyncThunk(
     }
 )
 
+//Owner Sign In/Log In POST request
 export const ownerSignin = createAsyncThunk(
     "owners/signin",
     async({username, password}, thunkAPI) => {
@@ -52,11 +57,15 @@ export const ownerSignin = createAsyncThunk(
                     password
                 })
             })
+
             let data = await response.json()
             if(response.status === 201){
                 localStorage.setItem("username",data.username)
+                localStorage.setItem("id",data.id)
                 return {...data}
             }else{
+                localStorage.removeItem("username")
+                localStorage.removeItem("id",data.id)
                 return thunkAPI.rejectWithValue(data)
             }
         } catch (e) {
@@ -77,44 +86,47 @@ const ownerSlice = createSlice({
         password_confirmation: "",
         status: "pending",
         errorMessage: "",
-        loggedIn: false
     },
     reducers: {
-        ownerLoggedIn(state,action){
-            state.loggedIn = action.payload
-        }
     },
     extraReducers: {
         [ownerSignup.pending](state){
             state.status = 'pending'
-            state.loggedIn = false
+            state.errorMessage = ""
         },
         [ownerSignup.fulfilled]: (state, {payload}) => {
-            // state.entities = action.payload
             state.status = 'fulfilled'
             state.email= payload.email
             state.firstName= payload.firstName
             state.lastName= payload.lastName
             state.username= payload.username
             state.errorMessage = ""
-            // state.password = payload.password
-            // state.password_confirmation = payload.password_confirmation
+            state.id = payload.id
         },
         [ownerSignup.rejected]: (state, {payload}) => {
             state.status = 'rejected'
             state.errorMessage = payload.errors
-            state.loggedIn = false
             state.email= ""
             state.firstName= ""
             state.lastName= ""
             state.username= ""
-
+        },
+        [ownerSignin.pending](state){
+            state.status = 'pending'
+            state.errorMessage = ""
+        },
+        [ownerSignin.fulfilled]: (state, {payload}) => {
+            state.status = 'fulfilled'
+            state.username= payload.username
+            state.errorMessage = ""
+            state.id = payload.id
+        },
+        [ownerSignin.rejected]: (state, {payload}) => {
+            state.status = 'rejected'
+            state.errorMessage = payload.errorMessage
+            state.username= ""
         }
     }
 })
 
-
-export const {ownerLoggedIn} = ownerSlice.actions
-
 export default ownerSlice.reducer
-// export const ownerSelector = state => state

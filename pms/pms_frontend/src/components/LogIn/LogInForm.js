@@ -1,4 +1,5 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {useSelector, useDispatch} from "react-redux"
 import {ownerSignin} from "../../features/login_signup/ownerSlice"
 import {OwnerContext} from "./OwnerContext"
@@ -8,24 +9,36 @@ import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
 function LogInForm() {
   //set up dispatch to call the reducer function that's needed to change state
   const dispatch = useDispatch() 
-
-  const {isLoggedIn} = useContext(OwnerContext)
-  console.log(isLoggedIn)
+  //set up navigate to send user to home after logging in
+  const navigate = useNavigate()
+  //access the OwnerContext to see if a User is logged in/signed up already
+  const {isLoggedIn, setIsLoggedIn} = useContext(OwnerContext)
   // //set up a useState to take in formData w/onChange event
   const [formData, setFormData] = useState({
     username: '',
     password: '',
   })
+  //create an allErrors state to store all errors to be mapped to JSX
+  const [allErrors, setAllErrors] = useState()
 
-  //see if there is an error message
-  const state = useSelector((state)=> state);
-  console.log(state)
-
+  //onSubmit handle
   const handleOwnerSigninSubmit = (e) => {
     e.preventDefault()
     dispatch(ownerSignin(formData))
+    .then(res => {
+      console.log(res)
+      if(res.type === "owners/signin/fulfilled"){
+        setIsLoggedIn(true)
+        navigate("/")
+      }else if(res.type === "owners/signin/rejected"){
+        //set the user log in boolean value to false
+        setIsLoggedIn(false)
+        //show error message if the submit was unsuccessful
+        setAllErrors(res["payload"]["errorMessage"])
+      }
+    })
   }
-
+  //onChange event for when form is updated
   function handleInputChange(e){
     setFormData({
       ...formData,
@@ -40,9 +53,11 @@ function LogInForm() {
           <Card className="shadow">
             <Card.Body>
               <div className="mb-3 mt-md-4">
-                <h2 className="fw-bold mb-5 text-uppercase ">Keystone Management</h2>
-                <div className="mb-3">
+                <h2 className="fw-bold mb-3 text-uppercase ">Keystone Management</h2>
+    
+                <p className="error-msg">{allErrors}</p>
 
+                <div className="mb-3">
                   <Form onSubmit = {handleOwnerSigninSubmit}>
                     <Form.Group className="mb-4" controlId="logInUsername">
                       <Form.Label>Username</Form.Label>
@@ -60,16 +75,20 @@ function LogInForm() {
                       </p>
                     </Form.Group>
                     <div className="d-grid">
-                      <Button variant="primary" type="submit">
-                        Login
-                      </Button>
+                      {(isLoggedIn) ? 
+                        <Button variant="primary" type="submit" disabled>
+                          Login
+                        </Button> :
+                        <Button variant="primary" type="submit">
+                          Login
+                        </Button> 
+                      }
                     </div>
                   </Form>
-                  
                   <div className="mt-4">
                     <p className="mb-0  text-center">
                       Don't have an account?{" "}
-                      <a href="{''}" className="text-primary fw-bold">
+                      <a href="/signup" className="text-primary fw-bold">
                         Sign Up
                       </a>
                     </p>
