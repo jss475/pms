@@ -1,0 +1,2 @@
+module TenantPropertiesHelper
+end

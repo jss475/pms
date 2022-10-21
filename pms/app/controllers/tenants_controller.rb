@@ -8,7 +8,7 @@ class TenantsController < ApplicationController
 
     def create
         tenant = Tenant.create!(tenant_params)
-        session[:user_id] = tenant.id
+        session[:tenant_id] = tenant.id
         render json: tenant, status: :created
     end
 

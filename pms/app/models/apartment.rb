@@ -1,5 +1,7 @@
 class Apartment < ApplicationRecord
-    has_one :property
+    has_one :property_apartment
+    has_one :property, through: :property_apartment
+    has_many :tenant_apartments
     has_many :tenants, through: :tenant_apartments
 
     validates :apartmentNumber, presence: true
