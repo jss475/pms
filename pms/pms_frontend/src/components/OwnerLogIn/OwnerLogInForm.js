@@ -1,8 +1,8 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {useDispatch} from "react-redux"
 import {ownerSignin} from "../../features/login_signup/ownerSlice"
-import {OwnerContext} from "./OwnerContext"
+import {OwnerContext} from "../../features/login_signup/OwnerContext"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
 
@@ -12,7 +12,7 @@ function LogInForm() {
   //set up navigate to send user to home after logging in
   const navigate = useNavigate()
   //access the OwnerContext to see if a User is logged in/signed up already
-  const {isLoggedIn, setIsLoggedIn} = useContext(OwnerContext)
+  const {ownerIsLoggedIn, setOwnerIsLoggedIn} = useContext(OwnerContext)
   // //set up a useState to take in formData w/onChange event
   const [formData, setFormData] = useState({
     username: '',
@@ -26,12 +26,13 @@ function LogInForm() {
     e.preventDefault()
     dispatch(ownerSignin(formData))
     .then(res => {
+      //if the signin was successful set the log in to be true
       if(res.type === "owners/signin/fulfilled"){
-        setIsLoggedIn(true)
+        setOwnerIsLoggedIn(true)
         navigate("/")
       }else if(res.type === "owners/signin/rejected"){
         //set the user log in boolean value to false
-        setIsLoggedIn(false)
+        setOwnerIsLoggedIn(false)
         //show error message if the submit was unsuccessful
         setAllErrors(res["payload"]["errorMessage"])
       }
@@ -74,7 +75,7 @@ function LogInForm() {
                       </p>
                     </Form.Group>
                     <div className="d-grid">
-                      {(isLoggedIn) ? 
+                      {(ownerIsLoggedIn) ? 
                         <Button variant="primary" type="submit" disabled>
                           Login
                         </Button> :

@@ -1,11 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { useNavigate } from "react-router-dom";
-
 
 //Owner Sign Up POST request
 export const ownerSignup = createAsyncThunk(
     "owners/signup",
-    async ({firstName, lastName, username, email, password, password_confirmation}, thunkAPI) => {
+    async ({first_name, last_name, username, email, password, password_confirmation}, thunkAPI) => {
         try{
             const response = await fetch("/signup_owners",{
                 method: "POST",
@@ -14,8 +12,8 @@ export const ownerSignup = createAsyncThunk(
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    firstName: firstName,
-                    lastName: lastName,
+                    first_name: first_name,
+                    last_name: last_name,
                     username: username,
                     email: email,
                     password: password,
@@ -78,8 +76,8 @@ export const ownerSignin = createAsyncThunk(
 const ownerSlice = createSlice({
     name: "owner",
     initialState: {
-        firstName: "",
-        lastName: "",
+        first_name: "",
+        last_name: "",
         username: "",
         email: "",
         password: "",
@@ -97,8 +95,8 @@ const ownerSlice = createSlice({
         [ownerSignup.fulfilled]: (state, {payload}) => {
             state.status = 'fulfilled'
             state.email= payload.email
-            state.firstName= payload.firstName
-            state.lastName= payload.lastName
+            state.first_name= payload.first_name
+            state.last_name= payload.last_name
             state.username= payload.username
             state.errorMessage = ""
             state.id = payload.id
@@ -107,8 +105,8 @@ const ownerSlice = createSlice({
             state.status = 'rejected'
             state.errorMessage = payload.errors
             state.email= ""
-            state.firstName= ""
-            state.lastName= ""
+            state.first_name= ""
+            state.last_name= ""
             state.username= ""
         },
         [ownerSignin.pending](state){

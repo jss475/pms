@@ -6,8 +6,8 @@ class Owner < ApplicationRecord
 
     
     validates :username, presence: true, uniqueness: true
-    validates :firstName, presence: true
-    validates :lastName, presence: true
+    validates :first_name, presence: true
+    validates :last_name, presence: true
     validates :email, presence: true, uniqueness: {message: 'Email has already been used'}
     validates_format_of :email, with: URI::MailTo::EMAIL_REGEXP
     validates :password, presence: true, confirmation: true, length: {minimum: 8}

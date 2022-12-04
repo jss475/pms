@@ -1,32 +1,35 @@
-import React, { useState, useEffect, useContext } from "react"
+import React, { useState, useContext } from "react"
+import { useNavigate } from "react-router-dom"
 import {useDispatch} from "react-redux"
 import {ownerSignup} from "../../features/login_signup/ownerSlice"
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Col, Button, Row, Container, Card, Form } from "react-bootstrap";
-import {OwnerContext} from "./OwnerContext"
-import "./SignUpForm.css"
+import {OwnerContext} from "../../features/login_signup/OwnerContext"
+import "./OwnerSignUpForm.css"
 
 function SignUpForm() {
 
   //set up dispatch to call the reducer function that's needed to change state
   const dispatch = useDispatch() 
   //access the OwnerContext to see if a User is logged in/signed up already
-  const {isLoggedIn, setIsLoggedIn} = useContext(OwnerContext)
+  const {ownerIsLoggedIn, setOwnerIsLoggedIn} = useContext(OwnerContext)
   //create an allErrors state to store all errors to be mapped to JSX
   const [allErrors, setAllErrors] = useState([])
+  //create navigate to redirect user after successfull signup
+  const navigate = useNavigate()
   //create an errors hash map to store the backend variable names with display names
   const errorKey = {
     password: "Password ",
     username: "Username ",
-    firstName: "First name ",
-    lastName: "Last name ",
+    first_name: "First name ",
+    last_name: "Last name ",
     email: "Email ",
     password_confirmation: "Password confirmation "
   }
   //set up a useState to take in formData w/onChange event
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+    first_name: '',
+    last_name: '',
     username: '',
     email: '',
     password: '',
@@ -47,11 +50,12 @@ function SignUpForm() {
     dispatch(ownerSignup(formData))
       .then(res => {
         if(res.type === "owners/signup/fulfilled"){
-          setIsLoggedIn(true)
+          setOwnerIsLoggedIn(true)
+          navigate("/")
         }else if(res.type === "owners/signup/rejected"){
            //if no one is already logged in or there is an error message with the submit
           //set the user log in boolean value to false
-          setIsLoggedIn(false)
+          setOwnerIsLoggedIn(false)
           //show error message if the submit was unsuccessful
           let errorsContainer = []
           let errorsObj = res["payload"]["errors"]
@@ -87,14 +91,14 @@ function SignUpForm() {
                 
                 <div className="mb-3">
                   <Form onSubmit = {handleOwnerSignupSubmit}>
-                    <Form.Group className="mb-4" controlId="signUpFirstName">
+                    <Form.Group className="mb-4" controlId="signUpfirst_name">
                         <Form.Label column="sm">First Name</Form.Label>
-                        <Form.Control type="text" placeholder="First Name" name="firstName" value={formData.firstName} onChange={handleInputChange} />
+                        <Form.Control type="text" placeholder="First Name" name="first_name" value={formData.first_name} onChange={handleInputChange} />
                     </Form.Group>
                     
-                    <Form.Group className="mb-4" controlId="signUpLastName">
+                    <Form.Group className="mb-4" controlId="signUplast_name">
                       <Form.Label>Last Name</Form.Label>
-                      <Form.Control type="text" placeholder="Last Name" name="lastName" value={formData.lastName} onChange={handleInputChange}/>
+                      <Form.Control type="text" placeholder="Last Name" name="last_name" value={formData.last_name} onChange={handleInputChange}/>
                     </Form.Group>
 
                     <Form.Group className="mb-4" controlId="signUpUsername">
@@ -123,7 +127,7 @@ function SignUpForm() {
                       </p>
                     </Form.Group>
                     <div className="d-grid">
-                      {(isLoggedIn) ? 
+                      {(ownerIsLoggedIn) ? 
                         <Button variant="primary" type="submit" disabled>
                           Signup
                         </Button> :

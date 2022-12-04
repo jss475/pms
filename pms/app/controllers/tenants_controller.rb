@@ -30,9 +30,9 @@ class TenantsController < ApplicationController
     private
 
     def tenant_params
-        params.permit(:id, :property_id, :lease_id, :apartment_id, :firstName, :lastName,
-            :username, :email, :password, :password_digest, :password_confirmation, :tenantAge, :tenantJobTitle,
-            :tenantJobSalary, :leaseStartDate, :leaseEndDate, :emergencyContact)
+        params.permit(:id, :property_id, :lease_id, :apartment_id, :first_name, :last_ame,
+            :username, :email, :password, :password_digest, :password_confirmation, :tenant_age, :tenant_job_title,
+            :tenant_job_salary, :lease_start_date, :lease_end_date, :emergency_contact)
     end
 
     def tenant_find

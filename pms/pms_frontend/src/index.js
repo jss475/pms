@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import {Provider} from "react-redux"
-import {OwnerProvider} from "./components/LogIn/OwnerContext"
+import {OwnerProvider} from "./features/login_signup/OwnerContext"
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from "./store"

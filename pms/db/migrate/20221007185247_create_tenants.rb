@@ -4,17 +4,17 @@ class CreateTenants < ActiveRecord::Migration[7.0]
       t.integer :property_id
       t.integer :lease_id
       t.integer :apartment_id
-      t.string :firstName
-      t.string :lastName
+      t.string :first_name
+      t.string :last_name
       t.string :username
       t.string :email
       t.string :password_digest
       t.string :password_confirmation
-      t.integer :tenantAge
-      t.string :tenantJobTitle
-      t.float :tenantJobSalary
-      t.date :leaseStartDate
-      t.date :leaseEndDate
+      t.integer :tenant_age
+      t.string :tenant_job_title
+      t.float :tenant_job_salary
+      t.date :lease_start_date
+      t.date :lease_end_date
       
       t.timestamps
     end

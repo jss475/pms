@@ -1,13 +1,13 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import {OwnerContext} from "./components/LogIn/OwnerContext"
-import LogIn from './components/LogIn/LogIn';
-import LogInForm from './components/LogIn/LogInForm';
-import SignUpForm from './components/LogIn/SignUpForm';
+import OwnerLogInForm from './components/OwnerLogIn/OwnerLogInForm';
+import OwnerSignUpForm from './components/OwnerSignUp/OwnerSignUpForm';
 import NavbarComp from "./components/NavbarComp/NavbarComp"
 import Home from "./components/Home/Home"
-import SqPaymentForm from './components/SquarePayment/SqPaymentForm';
+import CreatePropertyForm from "./components/Property/CreatePropertyForm"
+import PropertyContainer from "./components/Property/PropertyContainer"
+
 
 function App() {
 
@@ -17,9 +17,11 @@ function App() {
       <BrowserRouter>
         <Routes>
             <Route exact path='/' element={<Home />} />
-            <Route exact path='/login' element={<LogInForm />} />
-            <Route exact path='/signup' element={<SignUpForm />} />
-            <Route exact path="rent_payment" element={<SqPaymentForm />} />
+            <Route exact path='/login' element={<OwnerLogInForm />} />
+            <Route exact path='/signup' element={<OwnerSignUpForm />} />
+            <Route exact path='/new_property' element={<CreatePropertyForm />} />
+            <Route exact path='/all_properties' element={<PropertyContainer />} />
+            {/* <Route exact path="rent_payment" element={<SqPaymentForm />} /> */}
         </Routes>
       </BrowserRouter>
     </>

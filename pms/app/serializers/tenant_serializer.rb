@@ -1,10 +1,10 @@
 class TenantSerializer < ActiveModel::Serializer
   attributes :id, :property_id, :apartment_id,
-  :firstName, :lastName, :username, :email, 
+  :first_name, :last_name, :username, :email, 
   :password_confirmation, :password_digest,
-  :tenantAge, :tenantJobTitle, :tenantJobSalary,
-  :leaseStartDate, :leaseEndDate, :emergencyContact
+  :tenant_age, :tenant_job_title, :tenant_job_salary,
+  :lease_start_date, :lease_end_date, :emergency_contact
 
-  has_many :property
-  has_many :apartment
+  has_many :properties
+  has_many :apartments
 end

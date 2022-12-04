@@ -4,13 +4,13 @@ export const OwnerContext = createContext()
 
 function OwnerProvider({children}){
     //if the localstorage has a username, set the log in value to be true
-    const [isLoggedIn, setIsLoggedIn] = useState(()=> {
+    const [ownerIsLoggedIn, setOwnerIsLoggedIn] = useState(()=> {
         const logged = localStorage.getItem("username")
         return logged ? true : false
     })
     //return the state and state function as a provider for all of the children under it
     return (
-        <OwnerContext.Provider value={{isLoggedIn, setIsLoggedIn}}>
+        <OwnerContext.Provider value={{ownerIsLoggedIn, setOwnerIsLoggedIn}}>
             {children}
         </OwnerContext.Provider>
     )

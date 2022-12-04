@@ -9,6 +9,10 @@ class PropertiesController < ApplicationController
         render json: property_find, status: :ok
     end
 
+    def all_owner_properties
+        
+    end
+
     def create
         property = Property.create!(property_params)
         render json: property, status: :created
@@ -27,8 +31,8 @@ class PropertiesController < ApplicationController
     private
 
     def property_params
-        params.permit(:id, :PropertyNumber, :address, :bedroomCount, :bathroomCount, 
-            :rentalAmount, :propertySize, :leaseStartDate, :leaseEndDate, :totalBalance)
+        params.permit(:id, :property_name, :street_address, :city, :state, :zip_code, :bedroom_count, :bathroom_count, 
+            :total_rental_amount, :property_size, :lease_start_date, :lease_end_date, :total_balance)
     end
 
     def property_find

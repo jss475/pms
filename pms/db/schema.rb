@@ -33,8 +33,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_10_181029) do
   end
 
   create_table "owners", force: :cascade do |t|
-    t.string "firstName"
-    t.string "lastName"
+    t.string "first_name"
+    t.string "last_name"
     t.string "username"
     t.string "email"
     t.string "password_digest"
@@ -44,15 +44,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_10_181029) do
   end
 
   create_table "properties", force: :cascade do |t|
-    t.string "propertyName"
-    t.string "address"
-    t.integer "bedroomCount"
-    t.float "bathroomCount"
-    t.float "totalRentalAmount"
-    t.float "totalBalance"
-    t.integer "propertySize"
-    t.date "leaseStartDate"
-    t.date "leaseEndDate"
+    t.string "property_name"
+    t.string "street_address"
+    t.string "city"
+    t.string "state"
+    t.integer "zip_code"
+    t.integer "bedroom_count"
+    t.float "bathroom_count"
+    t.float "total_rental_amount"
+    t.float "total_balance", default: 0.0
+    t.integer "property_size"
+    t.date "lease_start_date"
+    t.date "lease_end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -82,20 +85,20 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_10_181029) do
     t.integer "property_id"
     t.integer "lease_id"
     t.integer "apartment_id"
-    t.string "firstName"
-    t.string "lastName"
+    t.string "first_name"
+    t.string "last_name"
     t.string "username"
     t.string "email"
     t.string "password_digest"
     t.string "password_confirmation"
-    t.integer "tenantAge"
-    t.string "tenantJobTitle"
-    t.float "tenantJobSalary"
-    t.date "leaseStartDate"
-    t.date "leaseEndDate"
+    t.integer "tenant_age"
+    t.string "tenant_job_title"
+    t.float "tenant_job_salary"
+    t.date "lease_start_date"
+    t.date "lease_end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "emergencyContact"
+    t.text "emergency_contact"
   end
 
 end
