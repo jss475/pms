@@ -19,6 +19,12 @@ module PmsBackend
     # https://owasp.org/www-community/SameSite
     config.action_dispatch.cookies_same_site_protection = :strict
 
+    # to use has_many_attached
+    # require "active_storage/engine"
+    # ActiveSupport.on_load(:active_record) do
+    #   extend ActiveStorage::Attached::Macros
+    # end
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

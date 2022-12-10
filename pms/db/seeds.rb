@@ -33,30 +33,108 @@ puts '✅ Seeding owner data...'
 # PROPERTY DATA
 puts '✅ Seeding property data...'
 
-# p1 = Property.create(
-#   property_name: '100 Third St',
-#   address: '100 Third St Hackensack, NJ 07601',
-#   bedroom_count: 3,
-#   bathroom_count: 2,
-#   total_rental_amount: 1000.00,
-#   totalBalance: 1000.00,
-#   propertySize: 1000,
-#   leaseStartDate: 01/01/2022,
-#   leaseEndDate: 12/31/2023
-# )
+p1 = Property.create!(
+  property_name: '100 Third St',
+  street_address: '100 Third St',
+  city: 'Hackensack',
+  state: 'NJ',
+  zip_code: '07601',
+  bedroom_count: 3,
+  bathroom_count: 2,
+  rental_amount: 1000,
+  total_rental_amount: 1000.00,
+  total_balance: 1000.00,
+  property_size: 1000,
+  lease_start_date: Date.parse('2022-01-01'),
+  lease_end_date: Date.parse('2023-12-31')
+)
 
-# p2 = Property.create(
-#   propertyName: '200 Third St',
-#   address: '200 Third St Hackensack, NJ 07601',
-#   bedroomCount: 2,
-#   bathroomCount: 1,
-#   totalRentalAmount: 900.00,
-#   totalBalance: 900.00,
-#   propertySize: 11000,
-#   leaseStartDate: 02/01/2022,
-#   leaseEndDate: 01/31/2023
-# )
+puts p1
 
+p2 = Property.create!(
+  property_name: '200 Third St',
+  street_address: '200 Third St',
+  city: 'Hackensack',
+  state: 'NJ',
+  zip_code: '07601',
+  bedroom_count: 2,
+  bathroom_count: 1,
+  rental_amount: 900.00,
+  total_rental_amount: 900.00,
+  total_balance: 900.00,
+  property_size: 11000,
+  lease_start_date: Date.parse("2022-02-01"),
+  lease_end_date: Date.parse("2023-01-31")
+)
+
+
+puts p2.property_name
+
+p3 = Property.create!(
+    property_name: '300 Third St',
+    street_address: '300 Third St',
+    city: 'Hackensack',
+    state: 'NJ',
+    zip_code: '07601',
+    bedroom_count: 2,
+    bathroom_count: 1,
+    rental_amount: 900.00,
+    total_rental_amount: 900.00,
+    total_balance: 900.00,
+    property_size: 11000,
+    lease_start_date: Date.parse("2022-02-01"),
+    lease_end_date: Date.parse("2023-01-31")
+)
+
+p4 = Property.create!(
+    property_name: '400 Third St',
+    street_address: '400 Third St',
+    city: 'Hackensack',
+    state: 'NJ',
+    zip_code: '07601',
+    bedroom_count: 2,
+    bathroom_count: 1,
+    rental_amount: 900.00,
+    total_rental_amount: 900.00,
+    total_balance: 900.00,
+    property_size: 11000,
+    lease_start_date: Date.parse("2022-02-01"),
+    lease_end_date: Date.parse("2023-01-31")
+  )
+
+  p5 = Property.create!(
+    property_name: '500 Third St',
+    street_address: '500 Third St',
+    city: 'Hackensack',
+    state: 'NJ',
+    zip_code: '07601',
+    bedroom_count: 2,
+    bathroom_count: 1,
+    rental_amount: 900.00,
+    total_rental_amount: 900.00,
+    total_balance: 900.00,
+    property_size: 11000,
+    lease_start_date: Date.parse("2022-02-01"),
+    lease_end_date: Date.parse("2023-01-31")
+  )
+
+  p6 = Property.create!(
+    property_name: '600 Third St',
+    street_address: '600 Third St',
+    city: 'Hackensack',
+    state: 'NJ',
+    zip_code: '07601',
+    bedroom_count: 2,
+    bathroom_count: 1,
+    rental_amount: 900.00,
+    total_rental_amount: 900.00,
+    total_balance: 900.00,
+    property_size: 11000,
+    lease_start_date: Date.parse("2022-02-01"),
+    lease_end_date: Date.parse("2023-01-31")
+  )
+
+  puts Property.first
 # # APARTMENT DATA
 # puts '✅ Seeding apartment data...'
 

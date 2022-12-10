@@ -6,6 +6,7 @@ class Property < ApplicationRecord
     has_many :tenant_properties
     has_many :tenants, through: :tenant_properties
     
+    validates :property_name, presence: true
     validates :street_address, presence: true
     validates :city, presence: true
     validates :state, presence: true
@@ -18,12 +19,13 @@ class Property < ApplicationRecord
     validates :lease_start_date, presence: true
     validates :lease_end_date, presence: true
 
-    validate :is_valid_start_date
-    validate :is_valid_end_date
+    validates_type :lease_start_date, :date
+    # validate :is_valid_start_date
+    validates_type :lease_end_date, :date
 
     private
     def is_valid_start_date
-        if((lease_start_date.is_a?(Date) rescue ArgumentError) == ArgumentError)
+        if((Date.valid_date?(lease_start_date) rescue ArgumentError) == ArgumentError)
             errors.add(:lease_start_date, 'Sorry, Invalid Lease Start Date')
           end
     end

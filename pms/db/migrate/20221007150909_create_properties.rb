@@ -5,9 +5,10 @@ class CreateProperties < ActiveRecord::Migration[7.0]
       t.string "street_address"
       t.string "city"
       t.string "state"
-      t.integer "zip_code"
+      t.string "zip_code"
       t.integer "bedroom_count"
       t.float "bathroom_count"
+      t.float "rental_amount"
       t.float "total_rental_amount"
       t.float "total_balance", default: 0
       t.integer "property_size"

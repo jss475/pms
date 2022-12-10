@@ -22,6 +22,7 @@ function CreatePropertyForm(){
         property_size: "",
         lease_start_date: "",
         lease_end_date: "",
+        image: ""
     })
 
     // function CheckBoxChange(){
@@ -29,15 +30,43 @@ function CreatePropertyForm(){
     // }
 
     function handleInputChange(e){
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        })
+        if(e.target.name === "bathroom_count" || e.target.name === "bedroom_count" || e.target.name === "zip_code" || e.target.name === "property_size"){
+            setFormData({
+                ...formData,
+                [e.target.name]: e.target.value
+            })
+        
+        }else{
+            setFormData({
+                ...formData,
+                [e.target.name]: e.target.value
+            })
+        }
+
     }
+
+    function handleNewPropSubmit(e){
+        e.preventDefault()
+        debugger
+        fetch("/properties",{
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(formData)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+            })
+    }
+
+
     console.log(formData)
     return (
         <>
-            <Form className="ms-5 me-5" >
+            <Form className="ms-5 me-5" encType="multiplart/form-data" onSubmit={handleNewPropSubmit}>
                 {/* <Form.Group className="mb-3" controlId="new-property-apartment">
                     <Form.Check type="checkbox" onChange={CheckBoxChange} label="Is this an apartment?/Are you renting out the entire property as one unit?" />
                 </Form.Group> */}
@@ -77,6 +106,8 @@ function CreatePropertyForm(){
                     <Form.Label>Total Rental Amount</Form.Label>
                     <Form.Control name="total_rental_amount" onChange={handleInputChange} placeholder="Enter Total Rental Amount"></Form.Control>
                 </Form.Group>
+                <label htmlFor="image">Image</label>
+                <input type="file" name="image" onChange={handleInputChange} />
                 {checked ? 
                     <>
                         <Form.Group className="mb-3" controlId="new-property-lease-start-date">

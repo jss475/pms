@@ -4,7 +4,7 @@ class CreateApartments < ActiveRecord::Migration[7.0]
       t.string :apartmentNumber
       t.string :address
       t.integer :bedroomCount
-      t.integer :bathroomCount
+      t.float :bathroomCount
       t.float :rentalAmount
       t.integer :propertySize
       t.date :leaseStartDate
